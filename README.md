@@ -3,7 +3,7 @@
 A tiny static site that goes from a commit on `main` to a live website through GitHub Actions:
 **test → build → deploy**. If the tests fail, build and deploy never run, so the live site stays untouched.
 
-**Live site:** https://ajoaugustine.github.io/college-events-portal/
+**Live site:** https://siops.net
 
 ```
 .
