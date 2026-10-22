@@ -2,7 +2,7 @@
 // Each test checks ONE thing: "given this input, I expect this answer".
 import test from "node:test";
 import assert from "node:assert";
-import { isValidName, isValidEmail } from "../site/js/validation.js";
+import { isValidName, isValidEmail } from "./site/validation.js";
 
 // ---- Email ----
 

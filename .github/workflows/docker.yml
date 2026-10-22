@@ -1,0 +1,51 @@
+name: Docker image
+
+# Runs alongside the Pages deploy; it never blocks or affects the live site.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write   # allowed to publish to GitHub's container registry (ghcr.io)
+
+env:
+  APP_VERSION: v1.0
+  IMAGE: ghcr.io/${{ github.repository }}
+
+jobs:
+  docker:
+    name: Build Docker image
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v7
+
+      - name: Stamp version into the page
+        run: |
+          SHORT_SHA="${GITHUB_SHA::7}"
+          DEPLOY_TIME="$(TZ=Asia/Kolkata date '+%d %b %Y, %H:%M IST')"
+          sed -i \
+            -e "s|__VERSION__|${APP_VERSION}|" \
+            -e "s|__COMMIT_SHA__|${SHORT_SHA}|" \
+            -e "s|__DEPLOY_TIME__|${DEPLOY_TIME} (Docker)|" \
+            site/index.html
+
+      - name: Build the image
+        run: docker build -t "$IMAGE:${GITHUB_SHA::7}" -t "$IMAGE:latest" .
+
+      - name: Check the container serves the site
+        run: |
+          docker run -d --name portal -p 8080:80 "$IMAGE:latest"
+          sleep 2
+          curl -fsS http://localhost:8080 | grep "College Events Portal"
+
+      - name: Publish image to GitHub Container Registry
+        if: github.ref == 'refs/heads/main'   # only main publishes
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          docker push "$IMAGE:${GITHUB_SHA::7}"
+          docker push "$IMAGE:latest"
+          echo "Run it anywhere: docker run --rm -p 8080:80 $IMAGE:latest"
