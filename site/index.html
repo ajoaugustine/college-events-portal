@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>College Events Portal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <!-- ✏️ LIVE DEMO: edit the line below in GitHub's web editor -->
+    <h1>Welcome to the College Events Portal</h1>
+    <p class="tagline">Everything happening on campus this semester, in one place.</p>
+  </header>
+
+  <main>
+    <section aria-labelledby="events-title">
+      <h2 id="events-title">Upcoming events</h2>
+      <ul class="events">
+        <li class="event">
+          <span class="event-date">05 Nov</span>
+          <div>
+            <h3>TechFest 2026</h3>
+            <p>Two days of talks, robotics, and project demos. Main Auditorium.</p>
+          </div>
+        </li>
+        <li class="event">
+          <span class="event-date">14 Nov</span>
+          <div>
+            <h3>24-Hour Hackathon</h3>
+            <p>Build something useful with your team. Food and Wi-Fi provided. CS Lab 3.</p>
+          </div>
+        </li>
+        <li class="event">
+          <span class="event-date">21 Nov</span>
+          <div>
+            <h3>Placement Talk: Cracking Your First Interview</h3>
+            <p>Alumni from top companies share what recruiters really look for. Seminar Hall.</p>
+          </div>
+        </li>
+        <li class="event">
+          <span class="event-date">28 Nov</span>
+          <div>
+            <h3>Cultural Night</h3>
+            <p>Music, dance, and drama from every department. Open-Air Theatre.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="register-title" class="card">
+      <h2 id="register-title">Register interest</h2>
+      <!-- Nothing is sent anywhere: validation happens in the browser only. -->
+      <form id="register-form" novalidate>
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" autocomplete="name">
+        <p class="error" id="name-error" aria-live="polite"></p>
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email">
+        <p class="error" id="email-error" aria-live="polite"></p>
+
+        <button type="submit">Register</button>
+      </form>
+      <p id="confirmation" class="confirmation" hidden aria-live="polite"></p>
+    </section>
+  </main>
+
+  <!-- These placeholders are replaced by the GitHub Actions workflow at build time. -->
+  <footer>
+    __VERSION__ · <code>__COMMIT_SHA__</code> · deployed __DEPLOY_TIME__
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+/* Large fonts and high contrast: readable on a projector and on phones. */
+:root {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --text: #f8fafc;
+  --muted: #cbd5e1;
+  --accent: #facc15;
+  --error: #fca5a5;
+  --success: #86efac;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.hero {
+  padding: 3rem 1rem 2rem;
+  text-align: center;
+  border-bottom: 4px solid var(--accent);
+}
+
+h1 {
+  margin: 0 auto;
+  max-width: 20ch;
+  font-size: clamp(2.2rem, 7vw, 4rem);
+  line-height: 1.1;
+}
+
+.tagline { color: var(--muted); margin: 1rem 0 0; }
+
+main {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+h2 { font-size: 1.8rem; color: var(--accent); }
+h3 { margin: 0 0 0.25rem; font-size: 1.35rem; }
+
+.events { list-style: none; padding: 0; margin: 0; }
+
+.event {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: var(--surface);
+  border-radius: 12px;
+}
+.event p { margin: 0; color: var(--muted); }
+
+.event-date {
+  flex: 0 0 auto;
+  min-width: 4.5rem;
+  padding: 0.4rem 0.6rem;
+  text-align: center;
+  font-weight: 700;
+  color: var(--bg);
+  background: var(--accent);
+  border-radius: 8px;
+}
+
+.card {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--surface);
+  border-radius: 12px;
+}
+.card h2 { margin-top: 0; }
+
+label { display: block; font-weight: 600; margin-top: 1rem; }
+
+input {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1.25rem;
+  border: 2px solid var(--muted);
+  border-radius: 8px;
+}
+input:focus { outline: 3px solid var(--accent); }
+
+button {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 0.9rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--bg);
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.error { min-height: 1.5em; margin: 0.25rem 0 0; color: var(--error); font-size: 1rem; }
+.confirmation { margin: 1.5rem 0 0; font-size: 1.4rem; font-weight: 700; color: var(--success); }
+
+footer {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 1.1rem;
+  border-top: 1px solid var(--surface);
+}
+footer code { color: var(--accent); font-size: 1.15rem; }
