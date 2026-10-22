@@ -9,6 +9,6 @@ export function isValidName(name) {
 // Simple, readable email check: something@something.something, no spaces.
 export function isValidEmail(email) {
   if (typeof email !== "string") return false;
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
-  // return true;   // 🐛 DEMO: comment out the line above and uncomment this one to break the tests
+  //return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+  return true;   // 🐛 DEMO: comment out the line above and uncomment this one to break the tests
 }
