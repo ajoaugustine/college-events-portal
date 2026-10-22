@@ -71,6 +71,32 @@
     __VERSION__ · <code>__COMMIT_SHA__</code> · deployed __DEPLOY_TIME__
   </footer>
 
-  <script type="module" src="js/app.js"></script>
+  <!-- Wires the form to the validation functions. Nothing is submitted or stored. -->
+  <script type="module">
+    import { isValidName, isValidEmail } from "./validation.js";
+
+    const form = document.getElementById("register-form");
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const nameOk = isValidName(nameInput.value);
+      const emailOk = isValidEmail(emailInput.value);
+
+      document.getElementById("name-error").textContent =
+        nameOk ? "" : "Please enter your name (at least 2 letters).";
+      document.getElementById("email-error").textContent =
+        emailOk ? "" : "Please enter a valid email, like you@college.edu.";
+
+      const confirmation = document.getElementById("confirmation");
+      confirmation.hidden = !(nameOk && emailOk);
+      if (nameOk && emailOk) {
+        confirmation.textContent = `Thanks, ${nameInput.value.trim()}! We'll keep you posted. 🎉`;
+        form.reset();
+      }
+    });
+  </script>
 </body>
 </html>
