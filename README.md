@@ -97,7 +97,7 @@ The **Stamp version into the page** step replaces the footer placeholders with `
 | 1:00 | Open `site/index.html` on GitHub → ✏️ **Edit**. Change the `<h1>`, e.g. *"Welcome, MCA Class of 2027!"* | "One line change. No server, no FTP, no SSH." |
 | 2:00 | **Commit changes** directly to `main` with a clear message. Copy the short SHA. | "A commit is the start of the journey." |
 | 2:30 | **Actions** tab → open the new run. Watch *Run automated tests* → *Build the site* → *Publish to GitHub Pages*. Click into *Stamp version into the page* to show its log. | "Every change is tested before it's allowed near production." |
-| 4:00 | While it runs, open the **old red run** (or red PR). Show the failing test: *rejects an empty email*. Point out that build and deploy show as **skipped**. | "Someone broke email validation. The tests caught it, and production never saw it." |
+| 4:00 | While it runs, open the **old red run** (or red PR). Show the failing test: *an empty email is invalid*. Point out that build and deploy show as **skipped**. | "Someone broke email validation. The tests caught it, and production never saw it." |
 | 6:00 | Run goes green → click the URL on the **deploy** job. Students **refresh** their phones. | "Refresh now!" |
 | 7:00 | Point to the footer: the **new SHA** matches the commit from 2:00, with a new IST timestamp. | "That's how you know exactly what is running in production." |
 | 8:00 | Optional: **Docker** segment (below), about 1 minute. | "Same site, packaged as a container." |
