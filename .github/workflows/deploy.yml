@@ -16,7 +16,7 @@ env:
 jobs:
   test:
     name: Run automated tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04   # pinned so the runner can't change mid-talk
     steps:
       - name: Get the code
         uses: actions/checkout@v7
@@ -27,13 +27,21 @@ jobs:
           node-version: lts/*
 
       - name: Run automated tests
-        run: npm test
+        run: npm test -- --test-reporter=spec | tee test-output.txt
+
+      # Only runs when tests fail: turns each failing test into a red annotation.
+      - name: Explain why the pipeline stopped
+        if: failure()
+        run: |
+          grep '^✖' test-output.txt | grep -v 'failing tests' | sed 's/ ([0-9.]*ms)$//' | sort -u |
+            while read -r line; do echo "::error title=Failing test::${line#✖ }"; done
+          echo "::error title=Production is safe::Tests failed, so build and deploy were skipped."
 
   build:
     name: Build the site
     needs: test                              # no green tests, no build
     if: github.ref == 'refs/heads/main'      # only main goes to production
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Get the code
         uses: actions/checkout@v7
@@ -64,7 +72,7 @@ jobs:
   deploy:
     name: Publish to GitHub Pages
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04   # pinned so the runner can't change mid-talk
     permissions:
       pages: write      # allowed to publish to Pages
       id-token: write   # proves to Pages that this run is really from this repo
