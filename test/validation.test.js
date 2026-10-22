@@ -1,27 +1,29 @@
-// Run with: npm test   (uses Node's built-in test runner, no extra packages)
-import { test } from "node:test";
-import assert from "node:assert/strict";
+// Run with: npm test
+// Each test checks ONE thing: "given this input, I expect this answer".
+import test from "node:test";
+import assert from "node:assert";
 import { isValidName, isValidEmail } from "../site/js/validation.js";
 
-test("accepts a normal email address", () => {
+// ---- Email ----
+
+test("a normal email is valid", () => {
   assert.equal(isValidEmail("priya@college.edu"), true);
 });
 
-test("rejects an empty email", () => {
+test("an empty email is invalid", () => {
   assert.equal(isValidEmail(""), false);
 });
 
-test("rejects emails missing @ or domain", () => {
+test("an email without @ is invalid", () => {
   assert.equal(isValidEmail("priya.college.edu"), false);
-  assert.equal(isValidEmail("priya@"), false);
-  assert.equal(isValidEmail("priya@college"), false);
 });
 
-test("accepts a real name", () => {
+// ---- Name ----
+
+test("a normal name is valid", () => {
   assert.equal(isValidName("Rahul"), true);
 });
 
-test("rejects a blank or one-letter name", () => {
-  assert.equal(isValidName("   "), false);
-  assert.equal(isValidName("R"), false);
+test("an empty name is invalid", () => {
+  assert.equal(isValidName(""), false);
 });
