@@ -72,7 +72,7 @@ jobs:
   deploy:
     name: Publish to GitHub Pages
     needs: build
-    runs-on: ubuntu-24.04   # pinned so the runner can't change mid-talk
+    runs-on: ubuntu-24.04
     permissions:
       pages: write      # allowed to publish to Pages
       id-token: write   # proves to Pages that this run is really from this repo
