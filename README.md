@@ -8,6 +8,7 @@ A tiny static site that goes from a commit on `main` to a live website through G
 ```
 .
 ├── .github/workflows/deploy.yml   # the pipeline: test → build → deploy
+├── .github/workflows/docker.yml   # separate: build + publish a Docker image
 ├── site/
 │   ├── index.html                 # ✏️ the heading you edit live
 │   ├── styles.css
@@ -15,7 +16,7 @@ A tiny static site that goes from a commit on `main` to a live website through G
 │       ├── validation.js          # isValidName / isValidEmail
 │       └── app.js                 # wires the form to the validators
 ├── test/validation.test.js        # 5 simple tests
-├── Dockerfile                     # same site in a container (local only)
+├── Dockerfile                     # same site in a container
 └── package.json
 ```
 
@@ -32,6 +33,13 @@ Repo **Settings → Pages → Source: GitHub Actions**. That's it.
 
 The build step stamps the version, commit SHA, and IST time into the page footer.
 
+A separate **Docker image** workflow builds the same site into a container and, on `main`, publishes it to
+GitHub's container registry. It runs alongside the Pages deploy and never blocks it:
+
+```bash
+docker run --rm -p 8080:80 ghcr.io/ajoaugustine/college-events-portal:latest   # http://localhost:8080
+```
+
 ## Demo
 
 1. **Change the site:** edit the `<h1>` in `site/index.html` on GitHub and commit to `main`. Watch the
@@ -46,7 +54,7 @@ npm test                          # Node 20+, no install needed
 python3 -m http.server -d site    # http://localhost:8000
 ```
 
-Or in Docker:
+Or build the image yourself:
 
 ```bash
 docker build -t college-events-portal .
